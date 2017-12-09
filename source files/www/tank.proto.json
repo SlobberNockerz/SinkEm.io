@@ -1,0 +1,508 @@
+{
+    "package": "Tank",
+    "messages": [
+        {
+            "name": "Vector",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "float",
+                    "name": "x",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "float",
+                    "name": "y",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "Motion",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "float",
+                    "name": "forceAngle",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "bool",
+                    "name": "force",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "Vector",
+                    "name": "iv",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "type": "Vector",
+                    "name": "ev",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "type": "Vector",
+                    "name": "position",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "Unit",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "id",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "type",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "cfgId",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "type": "float",
+                    "name": "hp",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "type": "Motion",
+                    "name": "motion",
+                    "id": 5
+                },
+                {
+                    "rule": "optional",
+                    "type": "float",
+                    "name": "rotation",
+                    "id": 6
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "ownerid",
+                    "id": 7
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "bornFrame",
+                    "id": 8
+                },
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "weaponIdx",
+                    "id": 9
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "playerConnid",
+                    "id": 10
+                },
+                {
+                    "rule": "optional",
+                    "type": "bool",
+                    "name": "autoFire",
+                    "id": 11
+                },
+                {
+                    "rule": "repeated",
+                    "type": "uint32",
+                    "name": "weaponFireFrame",
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "name": "Player",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "connid",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "id",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "name",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint64",
+                    "name": "score",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "type": "bool",
+                    "name": "die",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "SyncStartReq",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "name",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "viewW",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "viewH",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "SyncStartRes",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "connid",
+                    "id": 1
+                },
+                {
+                    "rule": "repeated",
+                    "type": "Unit",
+                    "name": "units",
+                    "id": 2
+                },
+                {
+                    "rule": "repeated",
+                    "type": "Unit",
+                    "name": "unitsToAdd",
+                    "id": 3
+                },
+                {
+                    "rule": "repeated",
+                    "type": "Player",
+                    "name": "players",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "unitBaseId",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "SyncCommander",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "CommanderType",
+                    "name": "cmd",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "connid",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "Join",
+                    "name": "join",
+                    "id": 10
+                },
+                {
+                    "rule": "optional",
+                    "type": "Quit",
+                    "name": "quit",
+                    "id": 11
+                },
+                {
+                    "rule": "optional",
+                    "type": "Reborn",
+                    "name": "reborn",
+                    "id": 12
+                },
+                {
+                    "rule": "optional",
+                    "type": "Move",
+                    "name": "move",
+                    "id": 13
+                },
+                {
+                    "rule": "optional",
+                    "type": "Rotate",
+                    "name": "rotate",
+                    "id": 14
+                },
+                {
+                    "rule": "optional",
+                    "type": "AddProp",
+                    "name": "addProp",
+                    "id": 15
+                }
+            ],
+            "messages": [
+                {
+                    "name": "Join",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "name",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "ai",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "Quit",
+                    "fields": []
+                },
+                {
+                    "name": "Reborn",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "name",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Move",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "float",
+                            "name": "angle",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "force",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "Rotate",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "float",
+                            "name": "angle",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "AddProp",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "int32",
+                            "name": "propType",
+                            "id": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Pkg",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "uint32",
+                    "name": "frame",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "PkgCmd",
+                    "name": "cmd",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "ErrCode",
+                    "name": "result",
+                    "id": 3
+                },
+                {
+                    "rule": "repeated",
+                    "type": "SyncCommander",
+                    "name": "syncCommanders",
+                    "id": 10
+                },
+                {
+                    "rule": "optional",
+                    "type": "SyncStartReq",
+                    "name": "syncStartReq",
+                    "id": 11
+                },
+                {
+                    "rule": "optional",
+                    "type": "SyncStartRes",
+                    "name": "syncStartRes",
+                    "id": 12
+                }
+            ]
+        }
+    ],
+    "enums": [
+        {
+            "name": "PropType",
+            "values": [
+                {
+                    "name": "PT_HEALTH_REGEN",
+                    "id": 1
+                },
+                {
+                    "name": "PT_MAX_HEALTH",
+                    "id": 2
+                },
+                {
+                    "name": "PT_BODY_DAMAGE",
+                    "id": 3
+                },
+                {
+                    "name": "PT_BULLET_SPEED",
+                    "id": 4
+                },
+                {
+                    "name": "PT_BULLET_PENETRATION",
+                    "id": 5
+                },
+                {
+                    "name": "PT_BULLET_DAMAGE",
+                    "id": 6
+                },
+                {
+                    "name": "PT_RELOAD",
+                    "id": 7
+                },
+                {
+                    "name": "PT_MOVEMENT_SPEED",
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "name": "PkgCmd",
+            "values": [
+                {
+                    "name": "SYNC_COMMANDERS",
+                    "id": 0
+                },
+                {
+                    "name": "SYNC_START_REQ",
+                    "id": 1
+                },
+                {
+                    "name": "SYNC_START_RES",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "ErrCode",
+            "values": [
+                {
+                    "name": "EC_SUCCESS",
+                    "id": 0
+                },
+                {
+                    "name": "EC_FULL",
+                    "id": -100
+                },
+                {
+                    "name": "EC_EXISTED",
+                    "id": -101
+                },
+                {
+                    "name": "EC_INVALID_PLAYER",
+                    "id": -102
+                },
+                {
+                    "name": "EC_ALIVE",
+                    "id": -103
+                }
+            ]
+        },
+        {
+            "name": "CommanderType",
+            "values": [
+                {
+                    "name": "CT_JOIN",
+                    "id": 0
+                },
+                {
+                    "name": "CT_QUIT",
+                    "id": 1
+                },
+                {
+                    "name": "CT_REBORN",
+                    "id": 2
+                },
+                {
+                    "name": "CT_MOVE",
+                    "id": 3
+                },
+                {
+                    "name": "CT_ROTATE",
+                    "id": 4
+                },
+                {
+                    "name": "CT_FIRE",
+                    "id": 5
+                },
+                {
+                    "name": "CT_ADD_PROP",
+                    "id": 6
+                }
+            ]
+        }
+    ]
+}

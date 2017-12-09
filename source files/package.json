@@ -1,0 +1,94 @@
+{
+    "name": "diep.io-clone",
+
+    "version": "0.2.0",
+
+    "dependencies": {
+        "protobufjs": "5.0.1",
+        "seedrandom": "latest",
+        "socket.io-client": "latest",
+        "socket.io": "latest",
+        "victor": "latest"
+    },
+
+    "devDependencies": {
+        "browserify": "12.0.0",
+        "jshint": "latest",
+        "uglify-js": "latest"
+    },
+
+    "engines": {
+        "node": ">=4.6.0"
+    },
+
+    "jshintConfig": {
+        "curly": true,
+        "laxbreak": true,
+        "strict": true,
+        "undef": true,
+        "unused": true,
+        "predef": [
+            "alert",
+            "console",
+            "document",
+            "module",
+            "PIXI",
+            "require",
+            "window"
+         ]
+    },
+
+    "scripts": {
+        "lint": "jshint modules/*.js view/*.js app/*.js",
+        "config": "python cfg/conv2js.py --excel_file=cfg/config.xlsx --output_path=cfg/ --skip_rows=1",
+        "proto": "pbjs proto/tank.proto -t json > www/tank.proto.json",
+
+        "debug": "browserify app/client.js > www/index.js",
+        "predebug": "npm run lint && npm run config && npm run proto",
+        "postdebug": "node --debug app/server.js",
+
+        "release": "browserify app/client.js | uglifyjs -mc > www/index.js",
+        "prerelease": "npm run lint && npm run proto",
+        "postrelease": "node app/server.js",
+
+        "replay": "node app/replay.js $RECORD"
+    },
+
+    "private": true,
+
+    "app": {
+        "domain": "tank.gaccob.com",
+        "port": 9000,
+        "proto": "tank.proto.json",
+
+        "logLevel": 1,
+
+        "world": {
+            "frame": 30,
+            "unitCollideCheckIntervalFrames": 15,
+            "clientSyncRotationIntervalFrames": 2,
+            "clientSyncForceIntervalFrames": 2,
+            "h": 2048,
+            "w": 2048,
+            "cw": 800,
+            "ch": 640,
+            "gridSize": 128,
+            "maxOnline": 30,
+            "initTank": 101,
+            "aiMaxCount": 0,
+            "obstacleMaxCount": 0,
+            "obstacleRegion": {
+                "wRatio": 0.92,
+                "hRatio": 0.92
+            }
+        },
+
+        "dieAnimation": {
+            "scaleIncrease": 0.1,
+            "alphaStart": 0.4,
+            "alphaEnd": 0.1,
+            "alphaDecrease": 0.1
+        }
+    }
+}
+

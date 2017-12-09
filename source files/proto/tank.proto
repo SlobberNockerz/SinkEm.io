@@ -1,0 +1,131 @@
+package Tank;
+
+enum PropType {
+    PT_HEALTH_REGEN = 1;
+    PT_MAX_HEALTH = 2;
+    PT_BODY_DAMAGE = 3;
+    PT_BULLET_SPEED = 4;
+    PT_BULLET_PENETRATION = 5;
+    PT_BULLET_DAMAGE = 6;
+    PT_RELOAD = 7;
+    PT_MOVEMENT_SPEED = 8;
+}
+
+message Vector {
+    optional float x = 1;
+    optional float y = 2;
+}
+
+message Motion {
+    optional float forceAngle = 1;
+    optional bool force = 2;
+    optional Vector iv = 3;
+    optional Vector ev = 4;
+    optional Vector position = 5;
+}
+
+message Unit {
+    optional uint32 id = 1;
+    optional int32 type = 2;
+    optional int32 cfgId = 3;
+    optional float hp = 4;
+    optional Motion motion = 5;
+    optional float rotation = 6;
+    optional uint32 ownerid = 7;            // bullets
+    optional uint32 bornFrame = 8;          // bullets
+    optional int32 weaponIdx = 9;           // bullets
+    optional string playerConnid = 10;      // tank
+    optional bool autoFire = 11;            // tank
+    repeated uint32 weaponFireFrame = 12;   // tank
+}
+
+message Player {
+    optional string connid = 1;
+    optional uint32 id = 2;
+    optional string name = 3;
+    optional uint64 score = 4;
+    optional bool die = 5;
+}
+
+message SyncStartReq {
+    optional string name = 1;
+    optional uint32 viewW = 2;
+    optional uint32 viewH = 3;
+}
+message SyncStartRes {
+    optional string connid = 1;
+    repeated Unit units = 2;
+    repeated Unit unitsToAdd = 3;
+    repeated Player players = 4;
+    optional uint32 unitBaseId = 5;
+}
+
+enum PkgCmd {
+    SYNC_COMMANDERS = 0;
+    SYNC_START_REQ = 1;
+    SYNC_START_RES = 2;
+}
+
+enum ErrCode {
+    EC_SUCCESS = 0;
+    EC_FULL = -100;
+    EC_EXISTED = -101;
+    EC_INVALID_PLAYER = -102;
+    EC_ALIVE = -103;
+}
+
+enum CommanderType {
+    CT_JOIN = 0;
+    CT_QUIT = 1;
+    CT_REBORN = 2;
+    CT_MOVE = 3;
+    CT_ROTATE = 4;
+    CT_FIRE = 5;
+    CT_ADD_PROP = 6;
+}
+
+message SyncCommander {
+    optional CommanderType cmd = 1;
+    optional string connid = 2;
+
+    message Join {
+        optional string name = 1;
+        optional bool ai = 2;
+    }
+    optional Join join = 10;
+
+    message Quit {
+    }
+    optional Quit quit = 11;
+
+    message Reborn {
+        optional string name = 1;
+    }
+    optional Reborn reborn = 12;
+
+    message Move {
+        optional float angle = 1;
+        optional bool force = 2;
+    }
+    optional Move move = 13;
+
+    message Rotate {
+        optional float angle = 1;
+    }
+    optional Rotate rotate = 14;
+
+    message AddProp {
+        optional int32 propType = 1;
+    }
+    optional AddProp addProp = 15;
+}
+
+message Pkg {
+    optional uint32 frame = 1;
+    optional PkgCmd cmd = 2;
+    optional ErrCode result = 3;
+    repeated SyncCommander syncCommanders = 10;
+    optional SyncStartReq syncStartReq = 11;
+    optional SyncStartRes syncStartRes = 12;
+}
+
